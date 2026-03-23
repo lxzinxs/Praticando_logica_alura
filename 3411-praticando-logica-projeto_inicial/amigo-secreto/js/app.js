@@ -44,6 +44,7 @@ function misturar(listaAmigos) {
 
 //reiniciar o sorteio
 function reiniciar(){
-    document.getElementById('lista-amigos').innerText = "";
+    amigos = [];
+    document.getElementById('lista-amigos').innerHTML = "";
     document.getElementById('lista-sorteio').innerHTML = "";
 }
