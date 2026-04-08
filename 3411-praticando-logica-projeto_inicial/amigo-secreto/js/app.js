@@ -1,17 +1,33 @@
 //array amigos
 let amigos = [];
 
-function adicionar() {
+function adicionar(){
     //nomear variaveis
     let nomesAmigos = document.getElementById('nome-amigo');
     let listaAmigos = document.getElementById('lista-amigos');
-    amigos.push(nomesAmigos.value)
+    let nomeOriginal = nomesAmigos.value.trim();
+    let nomeComparacao = nomeOriginal.toLowerCase();
+
+    //impedir nome vazio
+    if(nomeOriginal == ''){
+        alert("Coloque o nome de uma pessoa!");
+        return;
+    }
+
+    //impedir nome igual - ignorando maiúsculas e minúsculas
+    if(amigos.some(x => x.toLowerCase() === nomeComparacao)){
+       alert("Nome ja adicionado!"); 
+       return;
+    }
+
+    
+    amigos.push(nomeOriginal);
 
     //adicionar nomes
     if(listaAmigos.textContent == "") {
-        listaAmigos.textContent = nomesAmigos.value;
+        listaAmigos.textContent = nomeOriginal;
     } else {
-        listaAmigos.textContent = listaAmigos.textContent + ", " + nomesAmigos.value;
+        listaAmigos.textContent = listaAmigos.textContent + ", " + nomeOriginal;
     }
 
     //limpar campo depois de colocar o nome
@@ -19,8 +35,17 @@ function adicionar() {
 }
 
 function sortear() {
+    //sorteio com mais de 4 pessoas
+    if(amigos .length < 4){
+        alert("Adicione pelo menos 4 amigos!");
+        return;
+    }
+
     misturar(amigos);
     let listaSorteio = document.getElementById('lista-sorteio');
+
+    //limpar sortear
+    listaSorteio.innerHTML = "";
 
     //repeticao para sortear
     for(let i = 0; i < amigos.length; i++){
